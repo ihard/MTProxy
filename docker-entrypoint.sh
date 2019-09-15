@@ -102,6 +102,7 @@ INTERNAL_PORT=${INTERNAL_PORT:-"2398"}
 
 # FAKE TLS SITE
 SITE=${SITE:-"www.google.com"}
+SITE_HEX=$(echo -n "$SITE" | xxd -ps)
 
 # Report final configuration
 echo
@@ -109,8 +110,8 @@ echo "[*] Final configuration:"
 I=1
 echo "$SECRET" | tr ',' '\n' | while read S; do
   echo "[*]   Secret $I: $S"
-  echo "[*]   tg:// link for secret $I auto configuration: tg://proxy?server=${IP}&port=${PORT}&secret=ee${S}"
-  echo "[*]   t.me link for secret $I: https://t.me/proxy?server=${IP}&port=${PORT}&secret=ee${S}"
+  echo "[*]   tg:// link for secret $I auto configuration: tg://proxy?server=${IP}&port=${PORT}&secret=ee${S}${SITE_HEX}"
+  echo "[*]   t.me link for secret $I: https://t.me/proxy?server=${IP}&port=${PORT}&secret=ee${S}${SITE_HEX}"
   I=$(($I+1))
 done
 

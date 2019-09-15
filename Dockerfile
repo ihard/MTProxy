@@ -11,7 +11,7 @@ FROM debian:buster-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      curl ca-certificates iproute2 && \
+      curl ca-certificates iproute2 xxd && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt
 
 EXPOSE 443 2398
